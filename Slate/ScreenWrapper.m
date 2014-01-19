@@ -208,7 +208,8 @@ static NSString *resolutions = nil;
   } else {
     NSInteger screenRefInt = [screenRef integerValue];
     if (screenRefInt < ID_MAIN_SCREEN || screenRefInt >= [screens count]) {
-      screenId = screenRefInt;
+      NSPoint mousePoint = [NSEvent mouseLocation];
+      screenId = [self getScreenIdForPoint:mousePoint];
     } else {
       screenId = [[SlateConfig getInstance] getBoolConfig:ORDER_SCREENS_LEFT_TO_RIGHT] ? [[leftToRightToDefault objectAtIndex:screenRefInt] integerValue] : screenRefInt;
     }
